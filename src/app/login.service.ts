@@ -53,6 +53,9 @@ export class LoginService {
     else { return false }
     debugger
   }
+  isAuthenticated(): boolean {
+    return localStorage.getItem('currentUser') !== null;
+  }
   logOut():void
   {
     localStorage.removeItem('currentUser');
@@ -60,7 +63,5 @@ export class LoginService {
       this.router.navigate(['User/Login'])
     }
   }
-  isAuthenticated(): boolean {
-    return localStorage.getItem('currentUser') !== null;
-  }
+ 
 }

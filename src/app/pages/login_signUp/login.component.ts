@@ -109,6 +109,7 @@ export class LoginComponent {
   SignupStatus(){
     this.isLogin=false;
     this.isSignUP=true;
+    
   }
 
 }
