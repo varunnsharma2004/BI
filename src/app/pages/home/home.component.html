@@ -1,0 +1,224 @@
+<app-navbar></app-navbar>
+@if (Groups.length==0) {
+    <div class="container">
+        <div class="card p-4 mt-5 noGrp">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <img src="../../../assets/images/data.jpeg" width="30%" alt="">
+                </div>
+                <div class="col-md-12 text-center mt-3">
+                    <h3>No any Group are there</h3>
+                    <p>Click <b>Add New Group</b> at Navbar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@else {
+<div class="container" >
+    
+    <div class="row mt-4" *ngFor="let Group of Groups; let grpIndex = index">
+        <div class="col-md-12 mt-2">
+            <div class="card p-2" style="background: beige;">
+                <div class="row">
+                    <div class="col-md-9 mt-2">
+                        <h3 class="hov">{{Group.GrpName}}</h3>
+                    </div>
+                    <div class="col-md-3 ">
+                        <button type="button" *ngIf="Group.status==1" class="btn btn-outline-success"><span
+                                class="spinner-grow spinner-grow-sm text-success" role="status"></span>
+                            Active...</button>
+                        <button type="button" *ngIf="Group.status!=1" class="btn btn-outline-danger"><span
+                                class="spinner-grow spinner-grow-sm text-danger" role="status"></span>
+                            Inactive...</button>
+
+                        <h6 class="mt-4">
+                            <b> Total Amount: &nbsp; {{Group.totalAmount}}
+                            </b>
+                        </h6>
+                    </div>
+                    <div class="col-md-12 mt-2">
+
+                        <button class="btn btn-sm btn-info" (click)="addNewExpenses(Group.GrpName,Group.Members,grpIndex)">Add Expenses</button>
+                    </div>
+                    <div class="col-md-6 mt-4">
+
+                        <div class="card p-2 scroll1">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Expenses</th>
+                                        <th scope="col">Payment By</th>
+                                        <th scope="col">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bs-spy="scroll">
+                                   @for (item of expenses; track $index) {
+                                    @if (item.group==Group.GrpName) {
+                                    <tr>
+                                        <th scope="row">-</th>
+                                        <td>{{item.title}}</td>
+                                        <td> &#8377;{{item.exp}}</td>
+                                        <td>{{item.paymentBy}}</td>
+                                        <td>{{item.date | date:'mediumDate' }}</td>
+                                    </tr>}
+                                }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4">
+                        <div class="card p-2 ">
+                            <div class="row mt-1 ">
+                                <div class="col-md-6 mt-2">
+                                    <h5><b> Members </b></h5>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary btn-sm" (click)="addNew(Group.GrpName,grpIndex)"> Add
+                                        Members</button>
+                                    <button style="margin-left: 4%;" class="btn btn-warning btn-sm" (click)="openMail()"> Sent
+                                        Invite</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row scroll  ">
+                                @for (members of Group.Members
+                                ; track $index) {
+                                    @if(members.G_Name==Group.GrpName){
+                                <div class="col-md-12 mt-2">
+                                    <div class=" members p-1">
+                                        <div class="row">
+                                            <div class="col-md-1 mt-2">
+                                                <img src="../../../assets/images/profile.png " width="30px" alt="">
+                                            </div>
+                                            <div class="col-md-3 mt-2">
+                                                <p><b>{{members.name}}</b></p>
+                                            </div>
+                                            <div class="col-md-5 mt-2">
+                                                <span>Pay:- <b>{{members.payDone | number: '1.2-2'}}</b></span>
+                                            </div>
+                                          
+                                            <div class="col-md-2 mt-2">
+                                                <button class="btn btn-sm btn-outline-danger" (click)="memberDelete(grpIndex,$index)">Remove</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            }
+                                
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+}
+<div class="overlay verifybikedetailsdiv   right" *ngIf="addNewUser">
+    <div class="popup2  " style=" overflow-x: unset; width: 25%;">
+        <div class="modal-header tooltip_">
+            <h4 class="modal-title">
+                <b> Add New User</b>
+            </h4>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button type="button" class="btn-close" aria-label="Close"
+                (click)=" close()"></button>
+        </div>
+        <div class="modal-body ">
+            <div class="row">
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                <div class="col-md-8 mt-3">
+                    <input type="text" name="" class="form-control" id="" placeholder="User Name"
+                        [(ngModel)]="userName">
+                </div>
+                <div class="col-md-2 mt-3">
+                    <button class="btn btn-sm btn-primary" (click)="addUsers()">Add</button>
+                </div>
+            </div>
+        </div> 
+    </div> 
+</div>
+<div class="overlay verifybikedetailsdiv   right" *ngIf="isMail">
+    <div class="popup2  " style=" overflow-x: unset; width: 50%;">
+        <div class="modal-header tooltip_">
+            <h4 class="modal-title">
+                <b> Invitation Mail</b>
+            </h4>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button type="button" class="btn-close" aria-label="Close"
+                (click)=" close()"></button>
+        </div>
+        <div  class="modal-body ">
+        <form [formGroup]="EmailForm" class="row">
+          <div class="col-md-12">
+            <hr>
+            <input type="email" class="form-control" placeholder="Enter Mail" formControlName="ToMail">
+            <span class="mt-2 text-danger" *ngIf="EmailForm.controls['ToMail'].invalid &&EmailForm.controls['ToMail'].touched ">Enter Valid Email</span>
+          </div>
+          <div class="col-md-12 mt-2">
+            <input type="text" class="form-control" placeholder="Subject" formControlName="subject">
+          </div>
+          <div class="col-md-12 mt-2">
+            <textarea name="" id="" placeholder="Your Message" cols="10" rows="5" formControlName="msg"></textarea>
+          </div>
+        <div class="col-md-12 text-end mt-3">
+          <button class="btn btn-sm btn-secondary"  (click)=" close()" style="margin-right: 2%;">Cancel</button>
+          <button class="btn btn-sm btn-primary" [disabled]="EmailForm.invalid" (click)="SendMail()">Send</button>
+        </div>
+        </form>
+        </div> 
+    </div> 
+  </div>
+  <div class="overlay verifybikedetailsdiv   right" *ngIf="newExpens">
+    <div class="popup2  " style=" overflow-x: unset; width: 30%;">
+        <div class="modal-header tooltip_">
+            <h4 class="modal-title">
+                <b> Add Expenses</b>
+            </h4>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button type="button" class="btn-close" aria-label="Close"
+                (click)=" close()"></button>
+        </div>
+        <div  class="modal-body ">
+      <form [formGroup]="MembersForm" class="row">
+        <div class="col-md-12 mt-2">
+            <label for="">Title</label>
+            <input type="text" name="" id="" class="form-control" placeholder="Title" formControlName="title">
+
+        </div>
+        <div class="col-md-12 mt-2">
+            <label for="">Expenses</label>
+            <input type="number" name="" id="" class="form-control" placeholder="Expenses" formControlName="Expenses" >
+            
+        </div>
+        <div class="col-md-12 mt-2">
+            <label for="">Payment By</label>
+            <select class="form-select" aria-label="Default select example"  formControlName="PaymentBy">
+                <!-- <option value="0" selected>Payment By</option> -->
+                @for (grp of TempMemeber; track $index) {
+                    @if (grp.G_Name ==TempGrp) {
+                <option  value="{{grp.name}}">{{grp.name}}</option>
+                }
+            }
+               
+              </select>
+            
+        </div>
+        <div class="col-md-12 mt-3 text-center">
+            <button class="btn btn-sm btn-primary w-100" (click)="ExpensAddes()" [disabled]="MembersForm.invalid">Add</button>
+        </div>
+      </form>
+        </div> 
+    </div> 
+  </div>

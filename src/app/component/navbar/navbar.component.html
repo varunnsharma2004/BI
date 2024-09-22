@@ -1,0 +1,54 @@
+
+<div class="p-1">
+    <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+      <a class="navbar-brand hov" href="#" >Spend It</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+         
+        
+          
+     
+        </ul>
+        <app-button type="warning" value="Add New Group" style="width: 20% !important;margin-bottom: 4px;" (click)="AddNewGrp()"></app-button>
+        <form class="d-flex "  role="search">
+        
+          <button class="btn btn-outline-success" type="submit" (click)="logOut()">Log-Out</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="overlay verifybikedetailsdiv   right" *ngIf="newGroup">
+  <div class="popup2  " style=" overflow-x: unset; width: 30%;">
+      <div class="modal-header tooltip_">
+          <h4 class="modal-title">
+              <b> Add New Group</b>
+          </h4>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button type="button" class="btn-close" aria-label="Close"
+              (click)=" close()"></button>
+      </div>
+      <div class="modal-body ">
+          <div class="row">
+              <div class="col-md-12">
+                  <hr>
+              </div>
+              <div class="col-md-10 mt-3">
+                  <input type="text" name="" class="form-control" id="" placeholder="Group Name"
+                      [(ngModel)]="GroupName  ">
+
+              </div>
+             
+              <div class="col-md-2 mt-3">
+                  <button class="btn btn-sm btn-primary" (click)="addGroup()">Add</button>
+              </div>
+          </div>
+      </div> 
+  </div> 
+</div>

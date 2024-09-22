@@ -1,0 +1,16 @@
+nav{
+    background-color: rgb(22, 39, 33);
+    border-bottom: 2px solid black;
+}
+a{
+    color: white !important;
+}
+.hov {
+    display: inline-block;
+    font-weight: normal;
+    transition: transform 0.5s ;
+}
+
+.hov:hover {
+    transform: translateX(10px);
+}

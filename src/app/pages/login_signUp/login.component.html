@@ -1,0 +1,84 @@
+<div class="background">
+
+    <div class="row text" style="padding:5%; align-items: center;">
+        @if ( isLogin) {
+        <div class="card p-4 mt-5 log_Div noGrp">
+            <form [formGroup]="loginForm" class="row">
+                <div class="col-md-12 text-center">
+                    <h4>Login Here !</h4>
+                </div>
+                <div class="col-md-12 mt-4">
+                    <label for="">User Name</label>
+                    <input type="email" class="form-control" placeholder=" Your User Name"
+                        formControlName="userName">
+                        <span class="text-danger" *ngIf="loginForm.controls['userName'].invalid && loginForm.controls['userName'].touched "> Please Enter Valid User Name</span>
+
+                </div>
+                <div class="col-md-12 mt-3">
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" placeholder=" Password" formControlName="password">
+
+                </div>
+              
+                <div class="col-md-12 mt-4 text-center">
+                    <!-- <app-button type="simple" value="Login"></app-button> -->
+                    <button class="btn btn-sm btn-primary" style="width: 95%;" (click)="LoginUser()" [disabled]="loginForm.invalid">
+                        Login
+                    </button>
+                </div>
+                <div class="col-md-12 mt-4 text-center">
+                    <p>Ragister you account <span class="txt" (click)="SignupStatus()" >Sign Up</span></p>
+                </div>
+
+
+            </form>
+        </div>
+    }
+    @if(isSignUP) {
+        <div class="card p-4 mt-5 log_Div noGrp">
+<form [formGroup]="Ragistraion" class="row">
+    <div class="col-md-12 text-center">
+        <h4>Ragister Account !</h4>
+    </div>
+    <div class="col-md-12 mt-2">
+        <label for="">Full Name*</label>
+        <input type="text" name="" class="form-control" placeholder="Your Name" id="" formControlName="Name">
+        <span class="mt-2 text-danger" *ngIf="signIn['Name'].invalid && signIn['Name'].touched">Enter Your Name</span>
+    </div>
+    
+    <div class="col-md-12 mt-2">
+        <label for="">Number*</label>
+        <input type="number" name="" class="form-control" placeholder="Mobile Number" id="" formControlName="number">
+        <span class="mt-2 text-danger" *ngIf="signIn['number'].invalid && signIn['number'].touched">Enter Your number</span>
+ 
+    </div>
+    
+    <div class="col-md-12 mt-2">
+        <label for="">Email*</label>
+        <input type="email" name="" class="form-control" placeholder="Your Email" id="" formControlName="Email">
+        <span class="mt-2 text-danger" *ngIf="signIn['Email'].invalid && signIn['Email'].touched">Enter Your Email</span>
+    </div>
+    <div class="col-md-12 mt-2">
+        <label for="">Password*</label>
+        <input type="password" name="" class="form-control" placeholder="Your Password" id="" formControlName="password">
+        <span class="mt-2 text-danger" *ngIf="signIn['password'].invalid && signIn['password'].touched">Enter Your password</span>
+    </div>
+    <div class="col-md-12 mt-2">
+        <label for="">Confirm Password*</label>
+        <input type="password" name="" class="form-control" placeholder=" Confirm Password" id="" formControlName="Cpassword">
+        <span class="mt-2 text-danger" *ngIf="(signIn['Cpassword'].invalid && signIn['Cpassword'].touched)|| (signIn['Cpassword'].value !=signIn['password'].value)">Enter Your Confirm Password</span>
+    </div>
+    <div class="col-md-12 mt-2">
+        <button class="btn btn-sm btn-primary" style="width: 95%;" (click)="addUser()" [disabled]="registrationValidation()">
+            Ragister
+        </button>
+        <!-- <app-button type="simple" value="Ragister"></app-button> -->
+    </div> 
+     <div class="col-md-12 mt-4 text-center">
+        <p> You have account, Back to<span class="txt">&nbsp;Log-in</span></p>
+    </div>
+</form>
+         </div>
+        }
+    </div>
+</div>

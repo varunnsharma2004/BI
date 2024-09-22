@@ -1,0 +1,32 @@
+.hov {
+    display: inline-block;
+    font-weight: normal;
+    transition: transform 0.5s ;
+}
+
+.hov:hover {
+    transform: translateX(10px);
+}
+
+.scroll{
+    max-height: 260px !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.scroll1{
+    max-height: 400px !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+table{
+    text-align: center;
+}
+.members{
+    border: 1px solid;
+    border-radius: 5px;
+    /* padding: 5px !important; */
+}
+.noGrp{
+    background-color:rgb(195, 231, 219)
+}
